@@ -4,10 +4,10 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Punkt p1 = new Punkt(4, 2);	p1.id_odcinka = 1;  //spr dla Punkt(4,2) powinny sie przecinac
-		Punkt p2 = new Punkt(-1, 2); p2.id_odcinka = 1;
-		Punkt p3 = new Punkt(2, 1.5);p3.id_odcinka = 2;
-		Punkt p4 = new Punkt(3, 5);	p4.id_odcinka = 2;
+		Punkt p1 = new Punkt(3, 1.8);		p1.id_odcinka = 1;  //spr dla Punkt(4,2) powinny sie przecinac
+		Punkt p2 = new Punkt(-1, 2); 	p2.id_odcinka = 1;
+		Punkt p3 = new Punkt(2, 1.5);	p3.id_odcinka = 2;
+		Punkt p4 = new Punkt(3, 5);		p4.id_odcinka = 2;
 
 		ArrayList<Odcinek> listaOdcinkow = new ArrayList<>();
 
@@ -54,7 +54,9 @@ public class Main {
 		listaPunktow.add(p4);
 		
 		listaPunktow.sort(null); // posortowana lista pktow
-
+		
+		int indeksPunktuKoncaOdcinka = 0;
+		
 		for(int i = 0 ; i < listaPunktow.size(); i++){
 //		for (Iterator<Punkt> i = listaPunktow.iterator(); i.hasNext();) {
 			Punkt pom = listaPunktow.get(i);
@@ -79,12 +81,24 @@ public class Main {
 					//sprawdz czy punkt przeciecia.x  jest < od kolejnego punktu.x na liscie punktów
 					if (pkt != null) {
 						try{
-							if (pkt.x <= listaPunktow.get(i+1).x) {
+							//drugi koniec odcinka o2
+							for (int j = 0; j < listaPunktow.size(); j++) {
+								Punkt temp = listaPunktow.get(j);
+								if (temp.id_odcinka == pkt.id_odcinka) {
+									indeksPunktuKoncaOdcinka = listaPunktow.lastIndexOf(temp);
+								}
+							}
+							if (listaPunktow.get(indeksPunktuKoncaOdcinka).x <= listaPunktow.get(i+1).x	) {
 								// jesli tak to dodaj punkt przeciecia.id_odcinka do statusu
 								status.add(pkt.id_odcinka); //dodaj id do statusu
-								//int id = pkt.id_odcinka; //jezeli zostal ustaiony pkt przeciecia zmien ind
+								ind = pkt.id_odcinka; //jezeli zostal ustaiony pkt przeciecia zmien ind
 								//ind = status.indexOf(id); // index pod ktorym zostala dodana wartosc
-								System.out.println( pkt.id_odcinka+ " i "+ listaPunktow.get(i).id_odcinka  +" przecinaj¹ siê");
+								if (pkt.id_odcinka != listaPunktow.get(i+1).id_odcinka) {
+									System.out.println( pkt.id_odcinka+ " i "+ listaPunktow.get(i+1).id_odcinka  +" przecinaj¹ siê");
+								} 
+//								else
+//									System.out.println(pkt);
+								
 							}
 						} catch (IndexOutOfBoundsException  e) {
 							
