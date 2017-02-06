@@ -4,7 +4,7 @@ public class Main {
 
 	public static void main(String[] args) {
 
-		Punkt p1 = new Punkt(3, 1.8);		p1.id_odcinka = 1;  //spr dla Punkt(4,2) powinny sie przecinac
+		Punkt p1 = new Punkt(3, 1.1);		p1.id_odcinka = 1;  //spr dla Punkt(4,2) powinny sie przecinac
 		Punkt p2 = new Punkt(-1, 2); 	p2.id_odcinka = 1;
 		Punkt p3 = new Punkt(2, 1.5);	p3.id_odcinka = 2;
 		Punkt p4 = new Punkt(3, 5);		p4.id_odcinka = 2;
